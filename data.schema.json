@@ -1,6 +1,6 @@
 {
     "$schema": "https://json-schema.org/draft/2019-09/schema",
-    "$id": "https://github.com/ammpio/ammp-edge/blob/main/resources/schema/data.schema.json",
+    "$id": "https://github.com/ammpio/edge-schema/raw/main/data.schema.json",
     "title": "Data payload",
     "description": "This is the structure of data payloads submitted to the MQTT broker.",
     "type": "object",

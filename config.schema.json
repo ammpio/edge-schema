@@ -1,6 +1,6 @@
 {
     "$schema": "https://json-schema.org/draft/2019-09/schema",
-    "$id": "https://github.com/ammpio/ammp-edge/blob/main/resources/schema/config.schema.json",
+    "$id": "https://github.com/ammpio/edge-schema/raw/main/config.schema.json",
     "title": "AMMP Edge configuration",
     "description": "This document records the configuration of an AMMP Edge node",
     "type": "object",
@@ -95,6 +95,13 @@
                     "reading_type"
                 ],
                 "properties": {
+                    "key": {
+                        "type": "string",
+                        "title": "Key",
+                        "examples": [
+                            "sma_stp_1"
+                        ]
+                    },
                     "name": {
                         "type": "string",
                         "title": "Device name",
