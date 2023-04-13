@@ -98,6 +98,7 @@
                     "key": {
                         "type": "string",
                         "title": "Key",
+                        "default": "",
                         "examples": [
                             "sma_stp_1"
                         ]
