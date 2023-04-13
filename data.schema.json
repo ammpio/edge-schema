@@ -24,6 +24,7 @@
                 "type": "object",
                 "title": "Device data",
                 "required": [
+                    "_d",
                     "_vid"
                 ],
                 "properties": {
@@ -39,7 +40,8 @@
                     },
                     "_vid": {
                         "type": "string",
-                        "title": "Vendor ID of device (must match vendor_id in device table",
+                        "title": "Device vendor ID",
+                        "description": "Vendor ID of device (must match vendor_id in device table",
                         "examples": [
                             "strato-1",
                             "imt-1",
