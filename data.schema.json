@@ -92,6 +92,13 @@
                     "examples": [
                         93.77299094200134
                     ]
+                },
+                "data_provider": {
+                    "type": "string",
+                    "title": "Data provider",
+                    "examples": [
+                        "sma-hycon-csv"
+                    ]
                 }
             },
             "examples": [{
