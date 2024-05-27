@@ -153,6 +153,15 @@
                                     1
                                 ]
                             },
+                            "register_offset": {
+                                "type": "integer",
+                                "title": "Modbus register offset",
+                                "min": 0,
+                                "max": 65535,
+                                "examples": [
+                                    1232
+                                ]
+                            },
                             "device": {
                                 "type": "string",
                                 "title": "Serial device path",
