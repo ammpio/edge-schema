@@ -240,6 +240,13 @@
                         "examples": [
                             "modbustcp"
                         ]
+                    },
+                    "min_read_interval": {
+                        "type": "integer",
+                        "title": "Minimum reading interval (seconds)",
+                        "examples": [
+                            10
+                        ]
                     }
                 },
                 "minProperties": 1,
