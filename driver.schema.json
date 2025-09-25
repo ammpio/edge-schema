@@ -178,7 +178,16 @@
             "maximum": 15
           }
         }
-      }
+      },
+      "examples": [
+        {
+          "oil_pressure": {
+            "content": "Low Oil Pressure",
+            "register": 100,
+            "start_bit": 0
+          }
+        }
+      ]
     }
   }
 }
