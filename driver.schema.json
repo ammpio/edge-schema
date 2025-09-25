@@ -154,10 +154,21 @@
               "type": "array",
               "items": [
                 { "type": "integer", "title": "Value" },
-                { "type": "integer", "title": "Numeric Status Level", "enum": [0, 1, 2, 3, 4] }
+                {
+                  "type": "integer",
+                  "title": "Numeric Status Level",
+                  "enum": [0, 1, 2, 3, 4]
+                }
               ],
               "minItems": 2,
               "maxItems": 2
+            },
+            "examples": [
+              [
+                [0, 0],
+                [1, 3]
+              ]
+            ]
           }
         }
       }
