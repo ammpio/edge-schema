@@ -115,6 +115,52 @@
           }
         }
       }
+    },
+    "status_info": {
+      "type": "object",
+      "title": "Mapping of status info key to content and level",
+      "additionalProperties": {
+        "type": "object",
+        "properties": {
+          "content": {
+            "type": "string",
+            "title": "Content for the status info",
+            "examples": ["Low Oil Pressure", "High Temperature"]
+          },
+          "register": {
+            "type": "integer",
+            "title": "Modbus register for the status info"
+          },
+          "start_bit": {
+            "type": "integer",
+            "title": "Start bit (within the register) for the status info, first=1"
+          },
+          "length_bits": {
+            "type": "integer",
+            "title": "Length in bits for the status info"
+          },
+          "order": {
+            "type": "string",
+            "title": "Bit order",
+            "description": "Bit order within the register, msr=most significant bit first, lsr=least significant bit first",
+            "enum": ["msr", "lsr"],
+            "default": "msr"
+          },
+          "status_level_value_map": {
+            "type": "array",
+            "title": "Mapping between value and status level",
+            "description": "List of pairs that defines how to map a value to a status level (0=OK, 4=Critical)",
+            "items": {
+              "type": "array",
+              "items": [
+                { "type": "integer", "title": "Value" },
+                { "type": "integer", "title": "Numeric Status Level", "enum": [0, 1, 2, 3, 4] }
+              ],
+              "minItems": 2,
+              "maxItems": 2
+          }
+        }
+      }
     }
   }
 }

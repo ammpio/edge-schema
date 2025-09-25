@@ -34,6 +34,26 @@
               "7a7fcafa-6f07-4c97-9b10-952aad8e9dc4",
               "35346907"
             ]
+          },
+          "_s": {
+            "type": "array",
+            "title": "Status readings",
+            "items": {
+              "type": "object",
+              "title": "Status reading",
+              "properties": {
+                "c": {
+                  "type": "string",
+                  "title": "Content for the status info",
+                  "examples": ["Low Oil Pressure", "High Temperature"]
+                },
+                "l": {
+                  "type": "integer",
+                  "title": "Status level of the status info, 0=OK, 4=Critical",
+                  "examples": [0, 1, 2, 3, 4]
+                }
+              }
+            }
           }
         },
         "additionalProperties": {
@@ -54,6 +74,12 @@
             "level": 0.0,
             "genset_fuel_level_percent": 100.0,
             "genset_fuel_volume": 3048.625
+          },
+          {
+            "_d": "diesel_sensor",
+            "_vid": "gamicos-1",
+            "cpu_temp": 98.7,
+            "_s": [{ "c": "High Temperature", "l": 3 }]
           }
         ]
       }
