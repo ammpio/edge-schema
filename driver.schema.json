@@ -11,16 +11,20 @@
       "properties": {
         "register": {
           "type": "integer",
+          "minimum": 0,
+          "maximum": 65535,
           "title": "Modbus start register"
         },
         "fncode": {
           "type": "integer",
-          "default": 3,
+          "enum": [1, 2, 3, 4],
           "title": "Modbus function code",
           "examples": [3, 4]
         },
         "words": {
           "type": "integer",
+          "minimum": 1,
+          "maximum": 4,
           "title": "Number of 2-byte words for Modbus",
           "examples": [2]
         },
@@ -95,8 +99,7 @@
           "bit_order": {
             "type": "string",
             "title": "Bit order",
-            "enum": ["lsb", "msb"],
-            "default": "lsb"
+            "enum": ["lsb", "msb"]
           },
           "length_bits": {
             "type": "integer",
@@ -159,16 +162,17 @@
         "$ref": "#/definitions/field_opts"
       }
     },
+    "status_info_common": {
+      "$ref": "#/definitions/status_info_opts",
+      "default": {},
+      "title": "Common status info parameters"
+    },
     "status_info": {
-      "title": "Configs per status info key",
+      "title": "Status info items to be read",
       "type": "object",
       "additionalProperties": {
         "$ref": "#/definitions/status_info_opts"
       }
-    },
-    "status_info_common": {
-      "$ref": "#/definitions/status_info_opts",
-      "title": "Fallback if no specific config per status info key is defined"
     }
   }
 }
