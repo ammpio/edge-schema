@@ -344,7 +344,9 @@
     "drivers": {
       "title": "Additional drivers",
       "additionalProperties": {
-        "$ref": "driver.schema.json"
+        "$comment": {
+          "ref": "driver.schema.json"
+        }
       }
     },
     "timestamp": {
