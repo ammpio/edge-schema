@@ -392,6 +392,26 @@
       "title": "Push throttle delay",
       "description": "Delay to throttle data push if unsuccessful [deprecated]",
       "examples": [15]
+    },
+    "status_readings": {
+      "type": "array",
+      "title": "Status readings",
+      "description": "Pairs of device key and status info key that should be read out",
+      "items": {
+        "type": "object",
+        "properties": {
+          "d": {
+            "type": "string",
+            "title": "Device key",
+            "examples": ["dse855_1", "sens_1"]
+          },
+          "r": {
+            "type": "string",
+            "title": "Status info key",
+            "examples": ["oil_pressure"]
+          }
+        }
+      }
     }
   }
 }
