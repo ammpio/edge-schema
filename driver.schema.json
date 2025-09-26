@@ -5,6 +5,68 @@
   "title": "Driver schema",
   "required": ["fields"],
   "definitions": {
+    "field_opts": {
+      "type": "object",
+      "title": "Field options",
+      "properties": {
+        "register": {
+          "type": "integer",
+          "title": "Modbus start register"
+        },
+        "fncode": {
+          "type": "integer",
+          "default": 3,
+          "title": "Modbus function code",
+          "examples": [3, 4]
+        },
+        "words": {
+          "type": "integer",
+          "title": "Number of 2-byte words for Modbus",
+          "examples": [2]
+        },
+        "datatype": {
+          "type": "string",
+          "enum": [
+            "int16",
+            "uint16",
+            "int32",
+            "uint32",
+            "int64",
+            "uint64",
+            "float",
+            "double"
+          ],
+          "title": "Source type of data being read",
+          "examples": ["int16"]
+        },
+        "typecast": {
+          "type": "string",
+          "enum": ["int", "float", "str", "bool"],
+          "title": "Typecast for final processed reading",
+          "examples": ["int"]
+        },
+        "multiplier": {
+          "type": "number",
+          "title": "Reading multiplier (applied before offset)"
+        },
+        "offset": {
+          "type": "number",
+          "title": "Reading offset (applied after multiplier)"
+        },
+        "datamap": {
+          "type": "object",
+          "title": "Mapping between source and final value"
+        },
+        "unit": {
+          "type": "string",
+          "title": "Unit of reading (not used for data processing)"
+        },
+        "description": {
+          "type": "string",
+          "title": "Description of reading (not used for data processing)"
+        }
+      }
+    },
     "status_info_opts": {
       "type": "object",
       "title": "Status info field map",
@@ -79,43 +141,9 @@
   },
   "properties": {
     "common": {
-      "type": "object",
+      "$ref": "#/definitions/field_opts",
       "default": {},
       "title": "Common parameters for each field",
-      "properties": {
-        "fncode": {
-          "type": "integer",
-          "default": 3,
-          "title": "Modbus function code",
-          "examples": [3, 4]
-        },
-        "words": {
-          "type": "integer",
-          "title": "Number of 2-byte words for Modbus",
-          "examples": [2]
-        },
-        "datatype": {
-          "type": "string",
-          "enum": [
-            "int16",
-            "uint16",
-            "int32",
-            "uint32",
-            "int64",
-            "uint64",
-            "float",
-            "double"
-          ],
-          "title": "Source type of data being read",
-          "examples": ["int16"]
-        },
-        "typecast": {
-          "type": "string",
-          "enum": ["int", "float", "str", "bool"],
-          "title": "Typecast for final processed reading",
-          "examples": ["int"]
-        }
-      },
       "examples": [
         {
           "fncode": 4,
@@ -128,65 +156,7 @@
       "type": "object",
       "title": "Fields to be read",
       "additionalProperties": {
-        "type": "object",
-        "properties": {
-          "register": {
-            "type": "integer",
-            "title": "Modbus start register"
-          },
-          "words": {
-            "type": "integer",
-            "title": "Number of 2-byte words for Modbus",
-            "examples": [2]
-          },
-          "fncode": {
-            "type": "integer",
-            "default": 3,
-            "title": "Modbus function code",
-            "examples": [3, 4]
-          },
-          "datatype": {
-            "type": "string",
-            "enum": [
-              "int16",
-              "uint16",
-              "int32",
-              "uint32",
-              "int64",
-              "uint64",
-              "float",
-              "double"
-            ],
-            "title": "Source type of data being read",
-            "examples": ["int16"]
-          },
-          "typecast": {
-            "type": "string",
-            "enum": ["int", "float", "str", "bool"],
-            "title": "Typecast for final processed reading",
-            "examples": ["int"]
-          },
-          "multiplier": {
-            "type": "number",
-            "title": "Reading multiplier (applied before offset)"
-          },
-          "offset": {
-            "type": "number",
-            "title": "Reading offset (applied after multiplier)"
-          },
-          "datamap": {
-            "type": "object",
-            "title": "Mapping between source and final value"
-          },
-          "unit": {
-            "type": "string",
-            "title": "Unit of reading (not used for data processing)"
-          },
-          "description": {
-            "type": "string",
-            "title": "Description of reading (not used for data processing)"
-          }
-        }
+        "$ref": "#/definitions/field_opts"
       }
     },
     "status_info": {
