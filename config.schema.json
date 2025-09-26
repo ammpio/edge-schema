@@ -344,10 +344,7 @@
     "drivers": {
       "title": "Additional drivers",
       "additionalProperties": {
-        "type": "object",
-        "$comment": {
-          "ref": "https://github.com/ammpio/ammp-edge/blob/main/resources/schema/driver.schema.json"
-        }
+        "$ref": "driver.schema.json"
       }
     },
     "timestamp": {
