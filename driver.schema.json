@@ -5,138 +5,190 @@
   "title": "Driver schema",
   "required": ["fields"],
   "definitions": {
-    "field_opts": {
+    "common_modbus_reading_opts": {
       "type": "object",
-      "title": "Field options",
+      "title": "Common Modbus reading opts",
       "properties": {
-        "register": {
-          "type": "integer",
-          "minimum": 0,
-          "maximum": 65535,
-          "title": "Modbus start register"
-        },
         "fncode": {
           "type": "integer",
-          "enum": [1, 2, 3, 4],
-          "title": "Modbus function code",
+          "format": "u8",
+          "title": "Function code",
+          "description": "Modbus function code",
           "examples": [3, 4]
+        },
+        "register": {
+          "type": "integer",
+          "format": "u16",
+          "minimum": 0,
+          "maximum": 65535,
+          "title": "Register",
+          "description": "Modbus register"
         },
         "words": {
           "type": "integer",
+          "format": "u16",
           "minimum": 1,
           "maximum": 4,
-          "title": "Number of 2-byte words for Modbus",
+          "title": "Words",
+          "description": "Number of 2-byte words for Modbus",
           "examples": [2]
         },
-        "datatype": {
+        "order": {
           "type": "string",
-          "enum": [
-            "int16",
-            "uint16",
-            "int32",
-            "uint32",
-            "int64",
-            "uint64",
-            "float",
-            "double"
-          ],
-          "title": "Source type of data being read",
-          "examples": ["int16"]
+          "title": "Register order",
+          "description": "Register order when parsing multi-register readings",
+          "enum": ["msr", "lsr"]
         },
-        "typecast": {
+        "start_bit": {
+          "type": "integer",
+          "format": "u8",
+          "title": "Start bit",
+          "description": "Start bit, if extracting part of register",
+          "minimum": 0,
+          "maximum": 15
+        },
+        "bit_order": {
           "type": "string",
-          "enum": ["int", "float", "str", "bool"],
-          "title": "Typecast for final processed reading",
-          "examples": ["int"]
+          "title": "Bit order",
+          "description": "Bit order, if extracting part of register",
+          "enum": ["lsb", "msb"]
         },
-        "multiplier": {
-          "type": "number",
-          "title": "Reading multiplier (applied before offset)"
-        },
-        "offset": {
-          "type": "number",
-          "title": "Reading offset (applied after multiplier)"
-        },
-        "datamap": {
-          "type": "object",
-          "title": "Mapping between source and final value"
-        },
-        "unit": {
-          "type": "string",
-          "title": "Unit of reading (not used for data processing)"
-        },
-        "description": {
-          "type": "string",
-          "title": "Description of reading (not used for data processing)"
+        "length_bits": {
+          "type": "integer",
+          "format": "u8",
+          "title": "Length in bits",
+          "description": "Length in bits, if extracting part of register",
+          "minimum": 1,
+          "maximum": 16
         }
       }
     },
-    "status_info_opts": {
+    "common_mqtt_reading_opts": {
       "type": "object",
-      "title": "Status info field map",
-      "additionalProperties": {
-        "type": "object",
-        "properties": {
-          "content": {
-            "type": "string",
-            "title": "Content for the status info",
-            "examples": ["Low Oil Pressure", "High Temperature"]
-          },
-          "register": {
-            "type": "integer",
-            "title": "Modbus register for the status info"
-          },
-          "start_bit": {
-            "type": "integer",
-            "title": "Start bit (within the register) for the status info, first=0",
-            "minimum": 0,
-            "maximum": 15
-          },
-          "fncode": {
-            "type": "integer",
-            "title": "Modbus function code"
-          },
-          "bit_order": {
-            "type": "string",
-            "title": "Bit order",
-            "enum": ["lsb", "msb"]
-          },
-          "length_bits": {
-            "type": "integer",
-            "title": "Length in bits for the status info"
-          },
-          "status_level_value_map": {
-            "type": "array",
-            "title": "Mapping between value and status level",
-            "description": "List of pairs that defines how to map a value to a status level (0=OK, 4=Critical)",
-            "items": {
-              "type": "array",
-              "items": [
-                { "type": "integer", "title": "Value" },
-                {
-                  "type": "integer",
-                  "title": "Numeric Status Level",
-                  "enum": [0, 1, 2, 3, 4]
-                }
+      "title": "Common MQTT reading opts",
+      "properties": {
+        "parse_as": {
+          "type": "string",
+          "enum": ["bytes", "str", "hex"],
+          "title": "Parse input as",
+          "description": "Parse data based on serialization of readout"
+        },
+        "topic": {
+          "type": "string",
+          "title": "Topic",
+          "description": "MQTT topic to subscribe to",
+          "examples": ["sensor/temperature"]
+        }
+      }
+    },
+    "field_opts": {
+      "allOf": [
+        { "$ref": "#/definitions/common_modbus_reading_opts" },
+        { "$ref": "#/definitions/common_mqtt_reading_opts" },
+        {
+          "type": "object",
+          "title": "Field specific opts",
+          "properties": {
+            "datatype": {
+              "type": "string",
+              "enum": [
+                "int16",
+                "uint16",
+                "int32",
+                "uint32",
+                "int64",
+                "uint64",
+                "float",
+                "double"
               ],
-              "minItems": 2,
-              "maxItems": 2
+              "title": "Data type",
+              "description": "Source type of data being read",
+              "examples": ["int16"]
             },
-            "examples": [
-              [
-                [0, 0],
-                [1, 3]
-              ]
-            ]
+            "datamap": {
+              "type": "object",
+              "title": "Data map",
+              "description": "Mapping between source (hex) and final value"
+            },
+            "multiplier": {
+              "type": "number",
+              "title": "Multiplier",
+              "description": "Reading multiplier (applied before offset)"
+            },
+            "offset": {
+              "type": "number",
+              "title": "Reading offset (applied after multiplier)"
+            },
+            "typecast": {
+              "type": "string",
+              "enum": ["int", "float", "str", "bool"],
+              "title": "Typecast for final processed reading",
+              "examples": ["int"]
+            },
+            "unit": {
+              "type": "string",
+              "title": "Unit of reading (not used for data processing)"
+            },
+            "description": {
+              "type": "string",
+              "title": "Description of reading (not used for data processing)"
+            }
           }
         }
+      ]
+    },
+    "status_info_opts": {
+      "type": "object",
+      "title": "Status info opts",
+      "additionalProperties": {
+        "allOf": [
+          { "$ref": "#/definitions/common_modbus_reading_opts" },
+          {
+            "type": "object",
+            "title": "Status info specific opts",
+            "properties": {
+              "content": {
+                "type": "string",
+                "title": "Content",
+                "description": "Content for the status info",
+                "examples": ["Low Oil Pressure", "High Temperature"]
+              },
+              "status_level_value_map": {
+                "type": "array",
+                "title": "Status level value map",
+                "description": "List of pairs that defines how to map a value to a status level (0=OK, 4=Critical)",
+                "items": {
+                  "type": "array",
+                  "items": [
+                    { "type": "integer", "title": "Value", "format": "u8" },
+                    {
+                      "type": "integer",
+                      "title": "Numeric Status Level",
+                      "format": "u8",
+                      "enum": [0, 1, 2, 3, 4]
+                    }
+                  ],
+                  "minItems": 2,
+                  "maxItems": 2
+                },
+                "examples": [
+                  [
+                    [0, 0],
+                    [1, 3]
+                  ]
+                ]
+              }
+            }
+          }
+        ]
       },
       "examples": [
         {
           "oil_pressure": {
             "content": "Low Oil Pressure",
-            "register": 100,
-            "start_bit": 0
+            "register": 2049,
+            "start_bit": 0,
+            "length_bits": 4
           }
         }
       ]
