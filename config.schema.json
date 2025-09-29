@@ -341,57 +341,6 @@
         }
       ]
     },
-    "drivers": {
-      "title": "Additional drivers",
-      "additionalProperties": {
-        "$comment": {
-          "ref": "driver.schema.json"
-        }
-      }
-    },
-    "timestamp": {
-      "type": "string",
-      "title": "Timestamp",
-      "description": "Timestamp of config",
-      "examples": ["2022-07-30T06:07:48Z"]
-    },
-    "calc_vendor_id": {
-      "type": "string",
-      "title": "Vendor ID to apply to calculated fields (from 'output')",
-      "examples": ["ws-2"]
-    },
-    "push_timeout": {
-      "type": "integer",
-      "deprecated": true,
-      "title": "Timeout for data push (seconds) [deprecated]",
-      "examples": [120]
-    },
-    "read_interval": {
-      "type": "integer",
-      "default": 60,
-      "title": "Interval between readings (seconds)",
-      "examples": [60]
-    },
-    "read_roundtime": {
-      "type": "boolean",
-      "default": false,
-      "title": "Read at round times (based on interval duration)",
-      "examples": [true]
-    },
-    "volatile_q_size": {
-      "type": "integer",
-      "deprecated": true,
-      "title": "Volatile queue size",
-      "description": "Size of volatile queue for data push [deprecated]",
-      "examples": [5]
-    },
-    "push_throttle_delay": {
-      "type": "integer",
-      "deprecated": true,
-      "title": "Push throttle delay",
-      "description": "Delay to throttle data push if unsuccessful [deprecated]",
-      "examples": [15]
-    },
     "status_readings": {
       "type": "array",
       "title": "Status readings",
@@ -411,6 +360,37 @@
           }
         }
       }
+    },
+    "drivers": {
+      "title": "Additional drivers",
+      "additionalProperties": {
+        "$comment": {
+          "ref": "driver.schema.json"
+        }
+      }
+    },
+    "timestamp": {
+      "type": "string",
+      "title": "Timestamp",
+      "description": "Timestamp of config",
+      "examples": ["2022-07-30T06:07:48Z"]
+    },
+    "calc_vendor_id": {
+      "type": "string",
+      "title": "Vendor ID to apply to calculated fields (from 'output')",
+      "examples": ["ws-2"]
+    },
+    "read_interval": {
+      "type": "integer",
+      "default": 60,
+      "title": "Interval between readings (seconds)",
+      "examples": [60]
+    },
+    "read_roundtime": {
+      "type": "boolean",
+      "default": false,
+      "title": "Read at round times (based on interval duration)",
+      "examples": [true]
     }
   }
 }
