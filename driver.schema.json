@@ -70,7 +70,7 @@
         "parse_as": {
           "type": "string",
           "enum": ["bytes", "str", "hex"],
-          "title": "Parse input as",
+          "title": "Parse as",
           "description": "Parse data based on serialization of readout"
         },
         "topic": {
@@ -105,10 +105,16 @@
               "description": "Source type of data being read",
               "examples": ["int16"]
             },
-            "datamap": {
+            "valuemap": {
               "type": "object",
-              "title": "Data map",
-              "description": "Mapping between source (hex) and final value"
+              "title": "Value map",
+              "description": "Mapping between source (hex) and final value",
+              "additionalProperties": {
+                "oneOf": [
+                  { "type": "number" },
+                  { "type": "null" }
+                ]
+              }
             },
             "multiplier": {
               "type": "number",
