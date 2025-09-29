@@ -122,7 +122,8 @@
             "typecast": {
               "type": "string",
               "enum": ["int", "float", "str", "bool"],
-              "title": "Typecast for final processed reading",
+              "title": "Typecast",
+              "description": "Typecast for final processed reading",
               "examples": ["int"]
             },
             "unit": {
