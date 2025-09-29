@@ -75,7 +75,7 @@
       "additionalProperties": {
         "type": "object",
         "title": "Device",
-        "required": ["driver", "vendor_id", "device_model", "reading_type"],
+        "required": ["driver", "vendor_id", "reading_type"],
         "properties": {
           "key": {
             "type": "string",
