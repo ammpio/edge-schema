@@ -70,7 +70,7 @@
         "parse_as": {
           "type": "string",
           "enum": ["bytes", "str", "hex"],
-          "title": "Parse input as",
+          "title": "Parse as",
           "description": "Parse data based on serialization of readout"
         },
         "topic": {
