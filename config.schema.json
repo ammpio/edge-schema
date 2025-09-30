@@ -202,6 +202,11 @@
             "title": "Reading type",
             "examples": ["modbustcp"]
           },
+          "timeout": {
+            "type": "integer",
+            "title": "Reading timeout (seconds)",
+            "examples": [10]
+          },
           "min_read_interval": {
             "type": "integer",
             "title": "Minimum reading interval (seconds)",
