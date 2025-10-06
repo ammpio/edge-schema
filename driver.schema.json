@@ -110,10 +110,7 @@
               "title": "Value map",
               "description": "Mapping between source (hex) and final value",
               "additionalProperties": {
-                "oneOf": [
-                  { "type": "number" },
-                  { "type": "null" }
-                ]
+                "oneOf": [{ "type": "number" }, { "type": "null" }]
               }
             },
             "multiplier": {
