@@ -167,9 +167,8 @@
                     { "type": "integer", "title": "Value", "format": "u8" },
                     {
                       "type": "integer",
-                      "title": "Numeric Status Level",
-                      "format": "u8",
-                      "enum": [0, 1, 2, 3, 4]
+                      "title": "Staus Info Level",
+                      "format": "u8"
                     }
                   ],
                   "minItems": 2,
