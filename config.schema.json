@@ -352,6 +352,7 @@
       "description": "Pairs of device key and status info key that should be read out",
       "items": {
         "type": "object",
+        "required": ["d", "r"],
         "properties": {
           "d": {
             "type": "string",
