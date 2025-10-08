@@ -52,7 +52,8 @@
                   "title": "Status level of the status info, 0=OK, 4=Critical",
                   "examples": [0, 1, 2, 3, 4]
                 }
-              }
+              },
+              "required": ["c", "l"]
             }
           }
         },
