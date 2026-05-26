@@ -196,6 +196,7 @@
               "rawserial",
               "rawtcp",
               "sma_hycon_csv",
+              "encombi_csv",
               "sma_speedwire",
               "snmp"
             ],
